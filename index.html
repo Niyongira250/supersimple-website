@@ -1,358 +1,845 @@
+```html
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>YouTube.com Clone</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Taiwan — In the Heart of the Ocean</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles/general.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/video.css">
-    <link rel="stylesheet" href="styles/sidebar.css">
-  </head>
-  <body>
-    <header class="header">
-      <div class="left-section">
-        <img class="hamburger-menu" src="icons/hamburger-menu.svg">
-        <img class="youtube-logo" src="icons/youtube-logo.svg">
-      </div>
-      <div class="middle-section">
-        <input class="search-bar" type="text" placeholder="Search">
-        <button class="search-button">
-          <img class="search-icon" src="icons/search.svg">
-          <div class="tooltip">Search</div>
-        </button>
-        <!-- Put position absolute inside position relative -->
-        <button class="voice-search-button">
-          <img class="voice-search-icon" src="icons/voice-search-icon.svg">
-          <div class="tooltip">Search with your voice</div>
-        </button>
-      </div>
-      <div class="right-section">
-        <div class="upload-icon-container">
-          <img class="upload-icon" src="icons/upload.svg">
-          <div class="tooltip">Create</div>
-        </div>
-        <div class="youtube-apps-icon-container">
-          <img class="youtube-apps-icon" src="icons/youtube-apps.svg">
-          <div class="tooltip">YouTube Apps</div>
-        </div>
-        <div class="notifications-icon-container">
-          <img class="notifications-icon" src="icons/notifications.svg">
-          <div class="notifications-count">3</div>
-          <div class="tooltip">Notifications</div>
-        </div>
-        <img class="current-user-picture" src="channel-pictures/my-channel.jpeg">
-      </div>
-    </header>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <nav class="sidebar">
-      <div class="sidebar-link">
-        <img src="icons/home.svg">
-        <div>Home</div>
-      </div>
-      <div class="sidebar-link">
-        <img src="icons/explore.svg">
-        <div>Explore</div>
-      </div>
-      <div class="sidebar-link">
-        <img src="icons/subscriptions.svg">
-        <div>Subscriptions</div>
-      </div>
-      <div class="sidebar-link">
-        <img src="icons/originals.svg">
-        <div>Originals</div>
-      </div>
-      <div class="sidebar-link">
-        <img src="icons/youtube-music.svg">
-        <div>YouTube Music</div>
-      </div>
-      <div class="sidebar-link">
-        <img src="icons/library.svg">
-        <div>Library</div>
-      </div>
-    </nav>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <main>
-      <section class="video-grid">
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
-            <div class="video-time">14:20</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-1.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Talking Tech and AI with Google CEO Sundar Pichai!
-              </p>
-              <p class="video-author">
-                Marques Brownlee
-              </p>
-              <p class="video-stats">
-                3.4M views &#183; 6 months ago
-              </p>
-            </div>
-          </div>
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #f4f7f3;
+            color: #173b35;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 7%;
+
+            background: rgba(8, 45, 43, 0.72);
+            backdrop-filter: blur(15px);
+
+            color: white;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #8dd6c7;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #9ee3d4;
+        }
+
+        /* ---------------- HERO ---------------- */
+
+        .hero {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 40, 45, 0.25),
+                    rgba(3, 41, 39, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=85");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            padding: 120px 7% 70px;
+
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 780px;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 13px;
+            color: #b6e9df;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(55px, 8vw, 105px);
+            line-height: 0.95;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #9ee3d4;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 620px;
+            color: #e8f4f1;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #a7dfd2;
+            color: #103d38;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #c3eee5;
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.6);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* ---------------- INTRO ---------------- */
+
+        .intro {
+            padding: 110px 7%;
+            text-align: center;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .section-label {
+            color: #36877a;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(38px, 5vw, 60px);
+            color: #16483f;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #58736e;
+        }
+
+        /* ---------------- NATURE CARDS ---------------- */
+
+        .places {
+            padding: 30px 7% 110px;
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            position: relative;
+            min-height: 480px;
+            border-radius: 28px;
+            overflow: hidden;
+            color: white;
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: flex-end;
+
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 25%,
+                    rgba(3, 34, 31, 0.9)
+                );
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+        }
+
+        .card-content small {
+            color: #b8e7dd;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .card h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 34px;
+            margin: 8px 0;
+        }
+
+        .card p {
+            color: #d9ebe7;
+            line-height: 1.6;
+        }
+
+        .taroko {
+            background-image: url("https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=85");
+        }
+
+        .ocean {
+            background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85");
+        }
+
+        .forest {
+            background-image: url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=85");
+        }
+
+        /* ---------------- QUOTE ---------------- */
+
+        .quote {
+            padding: 120px 7%;
+            background: #123f3a;
+            color: white;
+            text-align: center;
+        }
+
+        .quote blockquote {
+            max-width: 900px;
+            margin: auto;
+
+            font-family: "Playfair Display", serif;
+            font-size: clamp(32px, 5vw, 60px);
+            line-height: 1.25;
+        }
+
+        .quote p {
+            margin-top: 25px;
+            color: #a8d6cd;
+        }
+
+        /* ---------------- EXPERIENCES ---------------- */
+
+        .experiences {
+            padding: 110px 7%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 50px;
+        }
+
+        .experience {
+            background: white;
+            padding: 30px 22px;
+            border-radius: 22px;
+            border: 1px solid #e1ebe7;
+
+            transition: 0.3s;
+        }
+
+        .experience:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(20, 70, 60, 0.1);
+        }
+
+        .icon {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .experience h3 {
+            margin-bottom: 10px;
+            color: #1a5148;
+        }
+
+        .experience p {
+            color: #708681;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* ---------------- LINKS ---------------- */
+
+        .links-section {
+            background: #e5f0ec;
+            padding: 100px 7%;
+        }
+
+        .links-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 40px;
+        }
+
+        .link-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 22px 25px;
+
+            background: rgba(255,255,255,0.8);
+            border-radius: 18px;
+
+            text-decoration: none;
+            color: #174b42;
+
+            border: 1px solid rgba(40,100,85,0.1);
+
+            transition: 0.3s;
+        }
+
+        .link-card:hover {
+            background: white;
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(25,70,60,0.08);
+        }
+
+        .link-card strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .link-card span {
+            font-size: 13px;
+            color: #78908b;
+        }
+
+        .arrow {
+            font-size: 22px;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+
+        footer {
+            background: #082e2b;
+            color: #b4d3ce;
+            padding: 60px 7% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        footer h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        footer p {
+            max-width: 450px;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #a7d9d0;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 45px;
+            padding-top: 25px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+
+        @media (max-width: 900px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 58px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <div class="logo">TAIWAN <span>◦</span> OCEAN</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#nature">Nature</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#explore">Explore</a></li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Island • Mountains • Ocean • Forest
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-2.webp">
-            <div class="video-time">8:22</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-2.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Try Not To Laugh Challenge #9
-              </p>
-              <p class="video-author">
-                Markiplier
-              </p>
-              <p class="video-stats">
-                19M views &#183; 4 years ago
-              </p>
-            </div>
-          </div>
+        <h1>
+            Taiwan<br>
+            <span>in the heart</span><br>
+            of the ocean.
+        </h1>
+
+        <p>
+            A small island surrounded by a vast blue world.
+            From mist-covered mountains to tropical forests and
+            wild Pacific shores, Taiwan is a place where nature
+            feels remarkably close.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#nature" class="btn btn-primary">
+                Discover Nature
+            </a>
+
+            <a href="#explore" class="btn btn-outline">
+                Explore Taiwan →
+            </a>
+
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-3.webp">
-            <div class="video-time">9:13</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-3.jpeg">
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro" id="nature">
+
+    <div class="section-label">
+        The island
+    </div>
+
+    <h2>Where mountains meet the sea</h2>
+
+    <p>
+        Taiwan is an island of extraordinary contrasts.
+        Alpine peaks rise above subtropical forests while
+        rivers cut through deep valleys and the Pacific Ocean
+        stretches endlessly beyond the coastline.
+        For nature lovers, the island is a world waiting to be explored.
+    </p>
+
+</section>
+
+
+<!-- DESTINATIONS -->
+
+<section class="places">
+
+    <div class="places-grid">
+
+        <article class="card taroko">
+
+            <div class="card-content">
+
+                <small>Eastern Taiwan</small>
+
+                <h3>Taroko</h3>
+
+                <p>
+                    Marble cliffs, rushing rivers and dramatic
+                    mountain valleys create one of Taiwan's
+                    most iconic landscapes.
+                </p>
+
             </div>
-            <div class="video-info">
-              <p class="video-title">
-                Crazy Tik Toks Taken Moments Before DISASTER
-              </p>
-              <p class="video-author">
-                SSSniperWolf
-              </p>
-              <p class="video-stats">
-                12M views &#183; 1 year ago
-              </p>
+
+        </article>
+
+
+        <article class="card ocean">
+
+            <div class="card-content">
+
+                <small>Pacific Coast</small>
+
+                <h3>The Blue Horizon</h3>
+
+                <p>
+                    Follow the coastline and discover quiet
+                    beaches, fishing villages and the endless
+                    Pacific horizon.
+                </p>
+
             </div>
-          </div>
+
+        </article>
+
+
+        <article class="card forest">
+
+            <div class="card-content">
+
+                <small>Mountain Forests</small>
+
+                <h3>Into the Green</h3>
+
+                <p>
+                    Ancient forests, misty trails and mountain
+                    ecosystems make Taiwan a paradise for hikers
+                    and wildlife lovers.
+                </p>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- QUOTE -->
+
+<section class="quote">
+
+    <blockquote>
+        “An island may be small,
+        but its horizons can be infinite.”
+    </blockquote>
+
+    <p>— Taiwan, surrounded by the Pacific</p>
+
+</section>
+
+
+<!-- EXPERIENCES -->
+
+<section class="experiences" id="experiences">
+
+    <div class="section-label">
+        Experience the island
+    </div>
+
+    <h2>Nature has many faces</h2>
+
+    <div class="experience-grid">
+
+        <div class="experience">
+            <div class="icon">⛰️</div>
+            <h3>Mountain Trails</h3>
+            <p>
+                Walk through alpine landscapes,
+                cloud forests and dramatic valleys.
+            </p>
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-4.webp">
-            <div class="video-time">22:09</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-4.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                The Simplest Math Problem No One Can Solve - Collatz Conjecture
-              </p>
-              <p class="video-author">
-                Veritasium
-              </p>
-              <p class="video-stats">
-                18M views &#183; 4 months ago
-              </p>
-            </div>
-          </div>
+        <div class="experience">
+            <div class="icon">🌊</div>
+            <h3>Ocean Life</h3>
+            <p>
+                Explore Taiwan's coastlines, islands,
+                coral ecosystems and Pacific waters.
+            </p>
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-5.webp">
-            <div class="video-time">11:17</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-5.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Kadane's Algorithm to Maximum Sum Subarray Problem
-              </p>
-              <p class="video-author">
-                CS Dojo
-              </p>
-              <p class="video-stats">
-                519K views &#183; 5 years ago
-              </p>
-            </div>
-          </div>
+        <div class="experience">
+            <div class="icon">🌿</div>
+            <h3>Wild Forests</h3>
+            <p>
+                Discover subtropical forests and
+                extraordinary plant diversity.
+            </p>
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-6.webp">
-            <div class="video-time">19:59</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-6.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Anything You Can Fit In The Circle I’ll Pay For
-              </p>
-              <p class="video-author">
-                MrBeast
-              </p>
-              <p class="video-stats">
-                141M views &#183; 1 year ago
-              </p>
-            </div>
-          </div>
+        <div class="experience">
+            <div class="icon">🌅</div>
+            <h3>Island Sunsets</h3>
+            <p>
+                End the day beside the ocean,
+                watching the sky disappear into blue.
+            </p>
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-7.webp">
-            <div class="video-time">10:13</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-7.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Why Planes Don't Fly Over Tibet
-              </p>
-              <p class="video-author">
-                RealLifeLore
-              </p>
-              <p class="video-stats">
-                6.6M views &#183; 1 year ago
-              </p>
-            </div>
-          </div>
+    </div>
+
+</section>
+
+
+<!-- EXPLORE LINKS -->
+
+<section class="links-section" id="explore">
+
+    <div class="links-container">
+
+        <div class="section-label">
+            Go further
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-8.webp">
-            <div class="video-time">7:12</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-8.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Inside The World's Biggest Passenger Plane
-              </p>
-              <p class="video-author">
-                Tech Vision
-              </p>
-              <p class="video-stats">
-                3.7M views &#183; 10 months ago
-              </p>
-            </div>
-          </div>
+        <h2>Explore Taiwan</h2>
+
+        <div class="links-grid">
+
+            <a
+                class="link-card"
+                href="https://eng.taiwan.net.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div>
+                    <strong>Official Taiwan Tourism</strong>
+                    <span>Travel information & destinations</span>
+                </div>
+                <div class="arrow">↗</div>
+            </a>
+
+
+            <a
+                class="link-card"
+                href="https://www.taiwan.gov.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div>
+                    <strong>Taiwan.gov.tw</strong>
+                    <span>Official information about Taiwan</span>
+                </div>
+                <div class="arrow">↗</div>
+            </a>
+
+
+            <a
+                class="link-card"
+                href="https://www.taiwan.nps.gov.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div>
+                    <strong>Taiwan National Parks</strong>
+                    <span>National parks & protected landscapes</span>
+                </div>
+                <div class="arrow">↗</div>
+            </a>
+
+
+            <a
+                class="link-card"
+                href="https://www.yushan.gov.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div>
+                    <strong>Yushan National Park</strong>
+                    <span>Mountains, trails & alpine nature</span>
+                </div>
+                <div class="arrow">↗</div>
+            </a>
+
+
+            <a
+                class="link-card"
+                href="https://www.taroko.gov.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div>
+                    <strong>Taroko National Park</strong>
+                    <span>Gorges, mountains & hiking</span>
+                </div>
+                <div class="arrow">↗</div>
+            </a>
+
+
+            <a
+                class="link-card"
+                href="https://www.railway.gov.tw/tra-tip-web/tip"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div>
+                    <strong>Taiwan Railway</strong>
+                    <span>Explore the island by train</span>
+                </div>
+                <div class="arrow">↗</div>
+            </a>
+
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-9.webp">
-            <div class="video-time">13:17</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-9.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                The SECRET to Super Human STRENGTH
-              </p>
-              <p class="video-author">
-                ThenX
-              </p>
-              <p class="video-stats">
-                20M views &#183; 3 years ago
-              </p>
-            </div>
-          </div>
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <h3>Taiwan, in the heart of the ocean.</h3>
+
+            <p>
+                A visual celebration of mountains, forests,
+                coastlines and the wild spirit of Taiwan.
+            </p>
+
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-10.webp">
-            <div class="video-time">7:53</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-10.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                How The World's Largest Cruise Ship Makes 30,000 Meals Every Day
-              </p>
-              <p class="video-author">
-                Business Insider
-              </p>
-              <p class="video-stats">
-                14M views &#183; 1 year ago
-              </p>
-            </div>
-          </div>
+        <div class="footer-links">
+
+            <a href="#home">Home</a>
+            <a href="#nature">Nature</a>
+            <a href="#experiences">Experiences</a>
+            <a href="#explore">Explore</a>
+
         </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-11.webp">
-            <div class="video-time">4:10</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-11.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                Dubai's Crazy Underwater Train and Other Things #Only in Dubai
-              </p>
-              <p class="video-author">
-                Destination Tips
-              </p>
-              <p class="video-stats">
-                3M views &#183; 1 year ago
-              </p>
-            </div>
-          </div>
-        </div>
+    </div>
 
-        <div class="video-preview">
-          <div class="thumbnail-row">
-            <img class="thumbnail" src="thumbnails/thumbnail-12.webp">
-            <div class="video-time">4:51</div>
-          </div>
-          <div class="video-info-grid">
-            <div class="channel-picture">
-              <img class="profile-picture" src="channel-pictures/channel-12.jpeg">
-            </div>
-            <div class="video-info">
-              <p class="video-title">
-                What would happen if you didn’t drink water? - Mia Nacamulli
-              </p>
-              <p class="video-author">
-                TED-Ed
-              </p>
-              <p class="video-stats">
-                12M views &#183; 5 years ago
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </body>
+    <div class="copyright">
+        © 2026 Taiwan Nature Project · Made for nature lovers 🌿
+    </div>
+
+</footer>
+
+</body>
 </html>
+```
